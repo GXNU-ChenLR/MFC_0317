@@ -32,7 +32,7 @@ END_MESSAGE_MAP()
 CMFC_0317_1View::CMFC_0317_1View()
 {
 	// TODO: 在此处添加构造代码
-	count = 0; a = 0;
+	count = 0; acount = 0;
 }
 
 CMFC_0317_1View::~CMFC_0317_1View()
@@ -91,7 +91,7 @@ void CMFC_0317_1View::OnLButtonDown(UINT nFlags, CPoint point)
 	GetCapture();
 	pDoc->x = point.x;
 	pDoc->y = point.y;
-	a = 1;
+	acount = 1;
 	CView::OnLButtonDown(nFlags, point);
 }
 
@@ -103,6 +103,7 @@ void CMFC_0317_1View::OnLButtonUp(UINT nFlags, CPoint point)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
+	acount = 0;
 	ReleaseCapture();
 	CClientDC dc(this);
 	int a;
@@ -119,20 +120,7 @@ void CMFC_0317_1View::OnMouseMove(UINT nFlags, CPoint point)
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
 	CMFC_0317_1Doc* pDoc = GetDocument();
 
-	/*CString s;
-	s.Format(_T("X=%d Y=%d"), point.x, point.y);
-	CClientDC dc(this);
-	dc.TextOutW(20, 20, s);
-
-	if (point.x - pDoc->x == 10 && point.y - pDoc->y == 10)
-	{
-		pDoc->countx+=1;
-		pDoc->county+=1;
-	}
-	CString ss;
-	ss.Format(_T("移动次数：X=%d Y=%d"), pDoc->countx,pDoc->county);
-	dc.TextOutW(200, 20, ss);*/
-	if (a == 1)
+	if (acount == 1)
 		count++;
 	CClientDC dc(this);
 	CString s;
