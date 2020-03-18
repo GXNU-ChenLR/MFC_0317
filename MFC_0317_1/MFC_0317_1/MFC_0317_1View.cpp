@@ -107,10 +107,14 @@ void CMFC_0317_1View::OnLButtonUp(UINT nFlags, CPoint point)
 	ReleaseCapture();
 	CClientDC dc(this);
 	int a;
-	a = (point.x - pDoc->x) / count;
-	CString ss;
+	int sum = 0;
+	sum += point.x - pDoc->x;
+	a = sum / count;
+	CString ss,aa;
 	ss.Format(_T("平均每次横向移动%d个像素"), a);
+	aa.Format(_T("point.x=%d,pDoc->x=%d"), point.x, pDoc->x);
 	dc.TextOutW(200, 20, ss);
+	dc.TextOutW(300, 50, aa);
 	CView::OnLButtonUp(nFlags, point);
 }
 
